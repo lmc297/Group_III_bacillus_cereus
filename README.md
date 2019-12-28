@@ -39,4 +39,8 @@ The raw BEAST 2 XML file used to construct snippy_relaxed_skyline_10burnin_MCC_C
 
 ## Sample Scripts
 
+### ancestral_state_beast_ST26.Rmd
+
+R Markdown document describing how ancestral state reconstruction was performed for 64 *B. cereus s.l.* genomes assigned to sequence type (ST) 26. Requires file snippy_relaxed_skyline_10burnin_MCC_CAnode_10burninLC_0burninTA.tree as input.
+
 

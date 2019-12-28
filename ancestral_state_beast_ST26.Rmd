@@ -95,5 +95,5 @@ plot(obj, fsize=c(0.4,1), color=cols)
 
 ### uncomment the follwing line to add pie chart node labels corresponding to posterior probability of being in a particular state
 
-nodelabels(pie = pd$ace, piecol = cols, cex= 0.3)
+#nodelabels(pie = pd$ace, piecol = cols, cex= 0.3)
 ```

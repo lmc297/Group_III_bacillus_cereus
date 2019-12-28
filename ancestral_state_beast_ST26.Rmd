@@ -83,7 +83,7 @@ pd <- summary(mtrees)
 
 ```{r}
 ### Plot tree
-
+cols<-setNames(c("lightseagreen","violetred3"),levels(ces))
 obj <- densityMap(mtrees, states=levels(ces)[2:1], plot=F)
 n <- length(obj$cols)
 obj$cols[1:n]<-colorRampPalette(rev(cols), space="Lab")(n)

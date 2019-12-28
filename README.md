@@ -39,8 +39,12 @@ The raw BEAST 2 XML file used to construct snippy_relaxed_skyline_10burnin_MCC_C
 
 ## Sample Scripts
 
+### ancestral_state_ML_GroupIII.Rmd
+
+R Markdown document describing how ancestral state reconstruction was performed for 71 de-replicated Group III *B. cereus s.l.* genomes. Requires one of the following as input: ksnp3_outgroupAmes_core_SNPs_matrix.fasta.treefile, ksnp3_outgroupAmes_SNPs_in_majority0.5_matrix.fasta.treefile, ksnp3_outgroupGCF_002574215_core_SNPs_matrix.fasta.treefile, ksnp3_outgroupGCF_002574215_SNPs_in_majority0.5_matrix.fasta.treefile
+
 ### ancestral_state_beast_ST26.Rmd
 
-R Markdown document describing how ancestral state reconstruction was performed for 64 *B. cereus s.l.* genomes assigned to sequence type (ST) 26. Requires file snippy_relaxed_skyline_10burnin_MCC_CAnode_10burninLC_0burninTA.tree as input.
+R Markdown document describing how ancestral state reconstruction was performed for 64 *B. cereus s.l.* genomes assigned to sequence type (ST) 26. Requires file snippy_relaxed_skyline_10burnin_MCC_CAnode_10burninLC_0burninTA.tree as input. 
 
 

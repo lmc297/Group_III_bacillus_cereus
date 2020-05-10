@@ -27,7 +27,7 @@ library(ggtree)
 library(phytools)
 ```
 
-# Step 2: Read in one of the following maximum likelihood (ML) phylogenies, constructed using core, majority, and all SNPs identifyied using kSNP3 and IQ-TREE
+# Step 2: Read in one of the following maximum likelihood (ML) phylogenies, constructed using core, majority, and all SNPs identified using kSNP3 and IQ-TREE
 
 ```{r}
 ### read ML phylogenies

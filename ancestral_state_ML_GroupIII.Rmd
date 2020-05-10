@@ -1,0 +1,110 @@
+---
+title: "Ancestral State Reconstruction for Group III Isolates"
+output: html_document
+---
+
+# Step 0: Install phytools and ape, if necessary
+
+```{r}
+### install phytools, if necessary, by un-commenting (i.e., removing the leading "#" character) the following command
+
+#install.packages("phytools")
+
+### install ape, if necessary
+
+#install.packages("ape")
+```
+
+# Step 1: Load phytools and ape
+
+```{r}
+### load phytools
+library(phytools)
+
+### load ape
+library(ape)
+```
+
+# Step 2: Run one of the following sets of two commands to read in the desired phylogeny, constructed using kSNP3 and IQ-TREE, and root the phylogeny at the appropriate outgroup
+
+```{r}
+### read tree in newick format
+
+### 1. For ML phylogeny constructed using core SNPs identified among 71 Group III B. cereus s.l. genomes, plus outgroup genome B. anthracis. str. Ames
+
+paranthracis <- read.tree(file = "ksnp3_outgroupAmes_core_SNPs_matrix.fasta.treefile")
+paranthracis <- root(paranthracis, outgroup = "ANI_US_1981_outgroupAnthracis_ST1_cesNegative_GCF_000007845")
+
+### 2. For ML phylogeny constructed using core SNPs identified among 71 Group III B. cereus s.l. genomes, plus outgroup genome B. cereus s.l. str. AFS057383
+
+paranthracis <- read.tree(file = "ksnp3_outgroupGCF_002574215_core_SNPs_matrix.fasta.treefile")
+paranthracis <- root(paranthracis, outgroup = "ENV_US_2014_outgroup_SToutgroup_cesNegative_GCF_002574215")
+
+### 3. For ML phylogeny constructed using majority SNPs identified among 71 Group III B. cereus s.l. genomes, plus outgroup genome B. anthracis. str. Ames
+
+paranthracis <- read.tree(file = "ksnp3_outgroupAmes_SNPs_in_majority0.5_matrix.fasta.treefile")
+paranthracis <- root(paranthracis, outgroup = "ANI_US_1981_outgroupAnthracis_ST1_cesNegative_GCF_000007845")
+
+### 4. For ML phylogeny constructed using majority SNPs identified among 71 Group III B. cereus s.l. genomes, plus outgroup genome B. cereus s.l. str. AFS057383
+
+paranthracis <- read.tree(file = "ksnp3_outgroupGCF_002574215_SNPs_in_majority0.5_matrix.fasta.treefile")
+paranthracis <- root(paranthracis, outgroup = "ENV_US_2014_outgroup_SToutgroup_cesNegative_GCF_002574215")
+```
+
+# Step 3: Create a vector corresponding to the binary discrete state of each isolate (*ces*-positive or *ces*-negative), named with the according tree tip labels
+
+```{r}
+### construct vector from tip label names
+
+ces <- as.factor(unlist(lapply(strsplit(x = paranthracis$tip.label, split = "_"), "[[", 6)))
+
+### name vector according to associated tree tip labels
+
+names(ces) <- paranthracis$tip.label
+```
+
+# Step 4: Simulate stochastic character maps on the phylogeny
+
+## These commands use the make.simmap function, the all-rates-different model, 1,000 simulations of stochastic character histories, and one of the following two priors on the root node, corresponding to the *ces*-positive and *ces*-negative state of the root node:
+
+### 1. Equal probability of the root node belonging to a *ces*-positive or *ces*-negative state
+
+### 2. Estimated probabilities of the root node belonging to a *ces*-positive or *ces*-negative state, obtained using the make.simmap function
+
+```{r}
+### 1. Equal probability of ces-negative and ces-positive
+
+mtrees <- make.simmap(tree = paranthracis, x = ces, model = "ARD", nsim = 1000, Q="empirical")
+
+### 2. Probability of root node being in ces-positive or ces-negative state is estimated using make.simmap
+
+mtrees <- make.simmap(tree = paranthracis, x = ces, model = "ARD", nsim = 1000, Q="empirical", pi = "estimated")
+```
+
+# Step 5: Create a summary of the simulated trees
+
+```{r}
+### Summarize trees
+
+pd <- summary(mtrees)
+```
+
+# Step 6: Plot a tree with the posterior density for a mapped character from the stochastic character mapping on the tree performed above
+
+```{r}
+### Plot tree
+
+cols<-setNames(c("lightseagreen","violetred3"),levels(ces))
+obj <- densityMap(mtrees, states=levels(ces)[2:1], plot=F)
+n <- length(obj$cols)
+obj$cols[1:n]<-colorRampPalette(rev(cols), space="Lab")(n)
+plot(obj, fsize=c(0.4,1), color=cols) + add.scale.bar(x = 0.75, y = 2)
+
+### the following line to add node labels corresponding to posterior probability of being in a ces-negative state
+
+nodelabels(text = pd$ace[,1], frame = "none", cex = 0.7, adj = -0.1)
+
+### the follwing line to add pie chart node labels corresponding to posterior probability of being in a particular state
+
+nodelabels(pie = pd$ace, piecol = cols, cex= 0.3)
+```

@@ -42,7 +42,7 @@ paranthracis <- read.tree(file = "ksnp3_Cluster1234_outgroupCluster7_SNPs_in_maj
 paranthracis <- read.tree(file = "ksnp3_Cluster1234_outgroupCluster7_SNPs_all_matrix.fasta.treefile")
 ```
 
-# Step 3: Root tree on the outgroup genome (ENV_CN_2008_paranthracis_ST266_cesNegative_GCF_000013065)
+# Step 3: Root tree on the outgroup genome (FOO_US_2015_paranthracis_ST2082_cesNegative_GCF_001913325)
 
 ```{r}
 paranthracis <- root(paranthracis, outgroup = "FOO_US_2015_paranthracis_ST2082_cesNegative_GCF_001913325", )

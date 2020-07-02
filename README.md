@@ -85,4 +85,6 @@ R Markdown document describing how ancestral state reconstruction was performed 
 
 R Markdown document describing how ancestral state reconstruction was performed for 23 *B. cereus s.l.* genomes assigned to sequence type (ST) 26. 
 
+## old_preprint_results.tar.gz
 
+Included for archival purposes only; contains obsolete results associated with a <a href="https://www.biorxiv.org/content/10.1101/2020.05.12.090951v1">preprint</a> for this study. The ST 26 temporal phylogeny results in this compressed directory were obtained using a set of 23 de-replicated ST 26 genomes. While de-replication is a common practice, <a href="https://academic.oup.com/mbe/article/doi/10.1093/molbev/msaa136/5850868">a recent study</a> has shown that the common practice of removing duplicate sequences to reduce a set of genomes to a set of unique sequences can lead to biases when constructing temporal phylogenies using Bayesian methods.
